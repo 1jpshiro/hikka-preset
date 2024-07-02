@@ -177,7 +177,7 @@ class HikkaInfoMod(loader.Module):
                         file.webpage.type != "gif" and chat_gif.default_banned_rights.send_gifs is False
                         or file.webpage.typr == "gif" and chat_gif.default_banned_rights.send_gifs is True
                     )
-                    else ""
+                    else {}
                 ),
             )
         else:
