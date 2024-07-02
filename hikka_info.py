@@ -7,6 +7,7 @@
 import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
+import telethon
 
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
