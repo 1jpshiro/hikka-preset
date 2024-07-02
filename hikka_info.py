@@ -178,7 +178,7 @@ class HikkaInfoMod(loader.Module):
 
             valid=True if hasattr(file, "webpage") and (
                 file.webpage.type == "photo"
-                or file.webpage.document.mime_type == "video"
+                or file.webpage.document.mime_type.split("/")[0] == "video"
             ) else False
 
             await self.inline.form(
