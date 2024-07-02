@@ -167,7 +167,7 @@ class HikkaInfoMod(loader.Module):
         if self.config["custom_button"]:
             file=await self.client(functions.messages.GetWebPagePreviewRequest(self.config["banner_url"]))
             chat_=await self.client.get_entity(message.chat_id)
-            if isinstance(chat, [Channel, Chat]):
+            if isinstance(chat_, [Channel, Chat]):
                 gif=chat_.default_banned_rights.send_gifs
                 video=chat_.default_banned_rights.send_videos
                 photo=chat_.default_banned_rights.send_photos
