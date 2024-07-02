@@ -8,7 +8,7 @@ import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
 from hikkatl import functions
-from hikkatl.types import Channel
+from hikkatl.types import Channel, Chat
 
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
@@ -179,8 +179,7 @@ class HikkaInfoMod(loader.Module):
             valid=True if file.webpage and (
                 file.webpage.type is "photo"
                 or file.webpage.document.mime_type is "video"
-            )
-            else False
+            ) else False
 
             await self.inline.form(
                 message=message,
