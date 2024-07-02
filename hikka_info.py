@@ -175,8 +175,8 @@ class HikkaInfoMod(loader.Module):
                 **(
                     {"photo": self.config["banner_url"]}
                     if self.config["banner_url"] and (
-                        file.webpage.type != "gif" and (chat_gif.default_banned_rights.send_gifs is False if isinstance(chat_gif, Channel) else True)
-                        or file.webpage.type == "gif" and (chat_gif.default_banned_rights.send_gifs is True if isinstance(chat_gif, Channel) else True)
+                        file.webpage.type != "gif" and ((chat_gif.default_banned_rights.send_gifs is False) if isinstance(chat_gif, Channel) else True)
+                        or file.webpage.type == "gif" and ((chat_gif.default_banned_rights.send_gifs is True) if isinstance(chat_gif, Channel) else True)
                     )
                     else {}
                 ),
