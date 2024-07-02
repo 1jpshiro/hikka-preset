@@ -7,7 +7,7 @@
 import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
-from hikkatl import functions
+from hikkatl.functions.messages import GetWebPagePreviewRequest
 from hikkatl.types import Channel
 
 from .. import loader, utils, version
@@ -165,14 +165,6 @@ class HikkaInfoMod(loader.Module):
     @loader.command()
     async def infocmd(self, message: Message):
         if self.config["custom_button"]:
-            file=await self.client(functions.messages.GetWebPagePreviewRequest(self.config['banner_url']))
-            chat_=await self.client.get_entity(message.chat.id)
-            if isinstance(chat_gif, Channel):
-                gif=chat_.default_banned_rights.send_gifs
-                media=chat_.default_banned_rights.send_media
-            else:
-                gif=False
-                media=False
 
             await self.inline.form(
                 message=message,
@@ -180,10 +172,7 @@ class HikkaInfoMod(loader.Module):
                 reply_markup=self._get_mark(),
                 **(
                     {"photo": self.config["banner_url"]}
-                    if self.config["banner_url"] and (
-                        file.webpage.type == "gif" and gif is False
-                        or file.webpage.type in ["photo", "document"] and media is False
-                    )
+                    if self.config["banner_url"]
                     else {}
                 ),
             )
