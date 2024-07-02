@@ -7,7 +7,7 @@
 import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
-from hikkatl.functions.messages import GetWebPagePreviewRequest
+from hikkatl import functions
 from hikkatl.types import Channel
 
 from .. import loader, utils, version
