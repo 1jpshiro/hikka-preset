@@ -170,21 +170,20 @@ class HikkaInfoMod(loader.Module):
             if isinstance(chat_gif, Channel):
                 gif=chat_gif.default_banned_rights.send_gifs
             else:
-                gif=True
-                
-            if self.config["banner_url"] and (
-                file.webpage.type != "gif" and gif is True
-                or file.webpage.type == "gif" and gif is False
-            ):
-                ph={"photo": self.config["banner_url"]}
-            else:
-                ph={}
+                gif=False
 
             await self.inline.form(
                 message=message,
                 text=self._render_info(True),
                 reply_markup=self._get_mark(),
-                **ph,
+                **(
+                    {"photo": self.config["banner_url"]}
+                    if self.config["banner_url"] and (
+                        file.webpage.type != "gif" and gif is True
+                        or file.webpage.type == "gif" and gif is False
+                    )
+                    else {}
+                ),
             )
         else:
             await utils.answer_file(
