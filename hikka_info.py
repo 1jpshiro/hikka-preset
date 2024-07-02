@@ -165,6 +165,21 @@ class HikkaInfoMod(loader.Module):
     @loader.command()
     async def infocmd(self, message: Message):
         if self.config["custom_button"]:
+            file=await self.client(GetWebPagePreviewRequest(self.config["banner_url"]))
+            chat_=await self.client.get_entity(message.chat.id)
+            if isinstance(chat, Channel) and (
+                file.webpage and (
+                    file.webpage.type is "photo"
+                    or file.webpage.document.mime_type.split("/")[0] is "video"
+                )
+            ):
+                gif=chat_.default_banned_rights.send_gifs
+                media=chat_.default_banned_rights.send_media
+                photo=chat_.default_banned_rights.send_photo
+            else:
+                gif=False
+                media=False
+                photo=False
 
             await self.inline.form(
                 message=message,
