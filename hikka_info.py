@@ -167,19 +167,21 @@ class HikkaInfoMod(loader.Module):
         if self.config["custom_button"]:
             file=await self.client(GetWebPagePreviewRequest(self.config["banner_url"]))
             chat_=await self.client.get_entity(message.chat.id)
-            if isinstance(chat, Channel) and (
+            if isinstance(chat, [Channel, Chat]) and (
                 file.webpage and (
                     file.webpage.type is "photo"
                     or file.webpage.document.mime_type.split("/")[0] is "video"
                 )
             ):
                 gif=chat_.default_banned_rights.send_gifs
-                media=chat_.default_banned_rights.send_media
-                photo=chat_.default_banned_rights.send_photo
+                video=chat_.default_banned_rights.send_videos
+                photo=chat_.default_banned_rights.send_photos
+                valid=True
             else:
                 gif=False
-                media=False
+                video=False
                 photo=False
+                valid=False
 
             await self.inline.form(
                 message=message,
@@ -187,7 +189,9 @@ class HikkaInfoMod(loader.Module):
                 reply_markup=self._get_mark(),
                 **(
                     {"photo": self.config["banner_url"]}
-                    if self.config["banner_url"]
+                    if self.config["banner_url"] and (
+                        file.
+                    )
                     else {}
                 ),
             )
