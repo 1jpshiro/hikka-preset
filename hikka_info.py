@@ -177,8 +177,8 @@ class HikkaInfoMod(loader.Module):
                 photo=False
 
             valid=True if file.webpage and (
-                file.webpage.type is "photo"
-                or file.webpage.document.mime_type is "video"
+                file.webpage.type == "photo"
+                or file.webpage.document.mime_type == "video"
             ) else False
 
             await self.inline.form(
@@ -188,9 +188,9 @@ class HikkaInfoMod(loader.Module):
                 **(
                     {"photo": self.config["banner_url"]}
                     if self.config["banner_url"] and valid and (
-                        file.webpage.type is "gif" and gif is False
-                        or file.webpage.type is "document" and video is False
-                        or file.webpage.type is "photo" and photo is False
+                        file.webpage.type == "gif" and gif is False
+                        or file.webpage.type == "document" and video is False
+                        or file.webpage.type == "photo" and photo is False
                     )
                     else {}
                 ),
