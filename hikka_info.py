@@ -176,7 +176,7 @@ class HikkaInfoMod(loader.Module):
                 video=False
                 photo=False
 
-            valid=True if file.webpage and (
+            valid=True if hasattr(file, "webpage") and (
                 file.webpage.type == "photo"
                 or file.webpage.document.mime_type == "video"
             ) else False
