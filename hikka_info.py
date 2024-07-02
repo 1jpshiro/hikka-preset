@@ -173,7 +173,10 @@ class HikkaInfoMod(loader.Module):
                 reply_markup=self._get_mark(),
                 **(
                     {"photo": self.config["banner_url"]}
-                    if self.config["banner_url"] and file.webpage.type != "gif" and chat_gif.default_banned_rights.send_gifs is False
+                    if self.config["banner_url"] and (
+                        file.webpage.type != "gif" and chat_gif.default_banned_rights.send_gifs is False
+                        or file.webpage.typr == "gif" and chat_gif.default_banned_rights.send_gifs is True
+                    )
                     else ""
                 ),
             )
