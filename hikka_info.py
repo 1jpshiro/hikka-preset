@@ -181,6 +181,7 @@ class HikkaInfoMod(loader.Module):
                     if self.config["banner_url"] and (
                         file.webpage.type != "gif" and gif == True
                         or file.webpage.type == "gif" and gif == False
+                    )
                     else {}
                 ),
             )
