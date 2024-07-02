@@ -167,6 +167,10 @@ class HikkaInfoMod(loader.Module):
         if self.config["custom_button"]:
             file=await self.client(functions.messages.GetWebPagePreviewRequest(self.config['banner_url']))
             chat_gif=await self.client.get_entity(message.chat.id)
+            if isinstance(chat_gif, Channel):
+                gif=chat_gif.default_banned_rights.send_gifs
+            else:
+                gif=True
 
             await self.inline.form(
                 message=message,
@@ -175,9 +179,8 @@ class HikkaInfoMod(loader.Module):
                 **(
                     {"photo": self.config["banner_url"]}
                     if self.config["banner_url"] and (
-                        file.webpage.type != "gif" and ((chat_gif.default_banned_rights.send_gifs is False) if isinstance(chat_gif, Channel) else True)
-                        or file.webpage.type == "gif" and ((chat_gif.default_banned_rights.send_gifs is True) if isinstance(chat_gif, Channel) else True)
-                    )
+                        file.webpage.type != "gif" and gif == True
+                        or file.webpage.type == "gif" and gif == False
                     else {}
                 ),
             )
