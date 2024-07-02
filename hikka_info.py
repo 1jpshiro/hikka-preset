@@ -7,7 +7,7 @@
 import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
-from hikkatl import functions.messages.GetWebPagePreviewRequest
+from hikkatl import functions.messages
 
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
