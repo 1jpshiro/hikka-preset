@@ -7,7 +7,6 @@
 import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
-from telethon import tl.messages.GetWebPagePreviewRequest
 
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
@@ -164,7 +163,7 @@ class HikkaInfoMod(loader.Module):
     @loader.command()
     async def infocmd(self, message: Message):
         if self.config["custom_button"]:
-            file=await self.client(tl.messages.GetWebPagePreviewRequest(self.config['banner_url']))
+            file=await self.client(telethon.tl.messages.GetWebPagePreviewRequest(self.config['banner_url']))
 
             await self.inline.form(
                 message=message,
