@@ -7,7 +7,7 @@
 import git
 from hikkatl.tl.types import Message
 from hikkatl.utils import get_display_name
-from hikkatl.functions.messages import GetWebPagePreviewRequest
+from hikkatl import functions.messages.GetWebPagePreviewRequest
 
 from .. import loader, utils, version
 from ..inline.types import InlineQuery
@@ -164,7 +164,7 @@ class HikkaInfoMod(loader.Module):
     @loader.command()
     async def infocmd(self, message: Message):
         if self.config["custom_button"]:
-            file=await self.client(GetWebPagePreviewRequest(self.config['banner_url']))
+            file=await self.client(functions.messages.GetWebPagePreviewRequest(self.config['banner_url']))
             chat_gif=await self.client.get_entity(message.chat.id)
 
             await self.inline.form(
